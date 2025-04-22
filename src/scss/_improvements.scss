@@ -1,0 +1,151 @@
+.improvements {
+  padding: 84px 0 50px;
+  overflow: hidden;
+
+  &__shift {
+    margin-left: max(calc((100% - 1160px) / 2), 15px);
+    margin-top: 57px;
+  }
+
+  &__slider .simplebar-track.simplebar-horizontal[style] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    background-color: #f1f1f1;
+    border-radius: 100px;
+    cursor: pointer;
+    pointer-events: all;
+  }
+
+  &__slider .simplebar-track.simplebar-horizontal[style] .simplebar-scrollbar {
+    cursor: pointer;
+  }
+
+  &__slider
+    .simplebar-track.simplebar-horizontal[style]
+    .simplebar-scrollbar:before {
+    opacity: 1;
+    background-color: $color-green-light;
+    top: 3px;
+    bottom: 3px;
+    left: 3px;
+    right: 3px;
+    cursor: pointer;
+  }
+
+  &__slider-track {
+    padding-top: 50px;
+    padding-left: 0;
+    margin: 0;
+    counter-reset: improvements;
+    display: flex;
+    gap: 18px;
+  }
+
+  &__item {
+    flex-shrink: 0;
+    width: 343px;
+    background-color: $color-green-light;
+    background-position: top center;
+    background-size: cover;
+    border-radius: 15px;
+    aspect-ratio: 343 / 408;
+    color: #262626;
+    counter-increment: improvements;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item-effect {
+    padding: 25px 25px 0px 25px;
+    width: 100%;
+    border-radius: 14px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    &::before {
+      content: "0" counter(improvements) "/";
+      display: block;
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+  }
+
+  &__item-text {
+    margin: 0;
+  }
+
+  &__item-bottom {
+    margin-top: auto;
+    padding: 0 25px 25px 25px;
+  }
+}
+
+.improvements-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 100;
+  padding: 15px;
+  display: none;
+
+  &.active {
+    display: flex;
+  }
+
+  &__close {
+    display: block;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    background-image: url("../img/icons/burger-close-icon.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin-left: auto;
+  }
+
+  &__inner {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid $color-green;
+    border-radius: 15px;
+    text-align: center;
+    width: 100%;
+    max-width: 971px;
+  }
+
+  &__title {
+    margin: 11px 0 34px;
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  &__descr {
+    margin: 34px 0 20px;
+  }
+
+  &__list-descr {
+    margin: 15px 0;
+    font-weight: 600;
+  }
+
+  &__list {
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 7px 0 0;
+    padding-left: 1.3em;
+  }
+
+  &__list-item {
+    margin: 8px 0;
+  }
+}

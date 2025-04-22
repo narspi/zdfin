@@ -1,0 +1,204 @@
+.footer {
+  padding: 100px 0 70px;
+  background-color: $color-green;
+  color: white;
+
+  &__container {
+    max-width: 1190px;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    color: white;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 33px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+
+  &__logo {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  &__logo-img {
+    display: block;
+  }
+
+  &__column {
+    & a {
+      color: white;
+    }
+  }
+
+  &__cource-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 20px 0;
+  }
+
+  &__cource-list {
+    @include reset-list;
+    font-weight: 700;
+    font-size: 18px;
+
+    & li {
+      margin: 20px 0;
+    }
+
+    & a {
+      text-decoration: double;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__address {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+    padding-left: 65px;
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 50px;
+      background-image: url("../img/icons/address-icon.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+  }
+
+  &__work-time {
+    font-weight: bold;
+    font-size: 28px;
+    position: relative;
+    margin: 0;
+    padding-left: 65px;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 50px;
+      background-image: url("../img/icons/work-time-icon.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+  }
+
+  &__contacts {
+    grid-column: 2 / 4;
+  }
+
+  &__contacts-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__social {
+    @include reset-list;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  &__social-link {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 28px;
+    display: inline-block;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    &::before {
+      content: "";
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      display: block;
+      margin-right: 15px;
+      width: 50px;
+      height: 50px;
+    }
+
+    &--phone::before {
+      background-image: url("../img/icons/whats-up-icon.svg");
+    }
+
+    &--tg::before {
+      background-image: url("../img/icons/tg-icon.svg");
+    }
+
+    &--mail::before {
+      background-image: url("../img/icons/mail-icon.svg");
+    }
+
+    &--vk::before {
+      background-image: url("../img/icons/vk-icon.svg");
+    }
+
+    &--inst::before {
+      background-image: url("../img/icons/inst.svg");
+    }
+
+    &--rutube::before {
+      background-image: url("../img/icons/rutube-icon.png");
+    }
+
+    &--vc::before {
+      background-image: url("../img/icons/vc.ru-icon.png");
+    }
+  }
+
+  &__info {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 900px;
+    font-size: 15px;
+    gap: 15px;
+    margin: 0 auto 15px;
+  }
+
+  &__info-inn {
+    margin: 0;
+  }
+
+  &__list {
+    display: contents;
+    @include reset-list;
+
+    & a {
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__copy {
+    text-align: center;
+    font-size: 15px;
+    max-width: 900px;
+    margin: 0 auto;
+    color: $color-grey;
+  }
+}
