@@ -8,7 +8,8 @@
     "start": "gulp start",
     "dev": "cross-env PRODUCTION=development gulp",
     "server": "cross-env PRODUCTION=development TUNNEL=run gulp",
-    "build": "gulp build"
+    "build": "gulp build",
+    "theme": "gulp theme"
   },
   "keywords": [],
   "author": "alexander ivanov",

@@ -52,6 +52,23 @@ const createCss = () => {
     .pipe(sync.stream());
 };
 
+const createCssTheme = () => {
+  return src("src/scss/**/*.scss")
+    .pipe(
+      scss({
+        outputStyle: "compressed",
+      })
+    )
+    .pipe(
+      cleanCSS(
+        {
+          level: 2
+        }
+      )
+    )
+    .pipe(dest("theme/zdfin-theme/assets/css"));
+};
+
 const createJs = () => {
   return gulp
     .src("./src/js/**/*.js")
@@ -59,12 +76,28 @@ const createJs = () => {
       gulpEsbuild({
         bundle: true, // Собираем все импорты в один файл
         minify: !isDevelopment, // Минификация только в production
+        minifyWhitespace: !isDevelopment,
         sourcemap: isDevelopment, // Генерация sourcemaps в dev-режиме
         target: "es6", // Целевая версия JS
       })
     )
     .pipe(dest("dist/js"))
     .pipe(sync.stream());
+};
+
+const createJsTheme = () => {
+  return gulp
+    .src("./src/js/**/*.js")
+    .pipe(
+      gulpEsbuild({
+        bundle: true,
+        minify: true,
+        minifyWhitespace: true,
+        sourcemap: false,
+        target: "es6",
+      })
+    )
+    .pipe(dest("theme/zdfin-theme/assets/js"));
 };
 
 const transportFonts = () => {
@@ -120,4 +153,11 @@ const buildTask = series(
 
 const startServer = series(buildTask, buildServer);
 
-export { defaultTask as default, buildTask as build, startServer as start };
+const themeTask = series(createCssTheme, createJsTheme);
+
+export {
+  defaultTask as default,
+  buildTask as build,
+  startServer as start,
+  themeTask as theme,
+};

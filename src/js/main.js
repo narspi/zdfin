@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const casesSlider = document.querySelector(".cases__slider");
   const reviewsSlider = document.querySelector(".reviews__slider");
   const stagesSlider = document.querySelector(".stages__slider");
+  const cookieConsent = document.querySelector('.js-cookie-consent');
+  const cookieAccept = document.querySelector('.js-cookie-accept');
+  const cookieDecline = document.querySelector('.js-cookie-decline');
 
   const mediaQueryWidth450 = window.matchMedia("(max-width: 450px)");
   const mediaQueryWidth900 = window.matchMedia("(max-width: 900px)");
@@ -18,14 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (headerBurger && nav) {
     const headerMenu = document.createElement("div");
     headerMenu.classList.add("header__menu");
-    headerMenu.innerHTML = `
-    <div class="header__menu-top">
-      <a href="#" class="header__logo">
-        <img src="/wp-content/themes/zdfin-theme/assets/img/logo.png" alt="Вернуться на главную">
-      </a>
-      <button class="header__menu-close" aria-label="Закрыть меню" aria-controls="main-menu"></button>
-    </div>
-    `;
+    headerMenu.innerHTML = '<div class="header__menu-top"><a href="#" class="header__logo"><img src="/wp-content/themes/zdfin-theme/assets/img/logo.png" alt="Вернуться на главную"></a><button class="header__menu-close" aria-label="Закрыть меню" aria-controls="main-menu"></button></div>';
     const cloneNav = nav.cloneNode(true);
     cloneNav.className = "nav-menu";
     headerMenu.append(cloneNav);
@@ -179,29 +175,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const forms = document.querySelectorAll("[data-bitrix-form]");
 
-  const svgHtmlLoading = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="22px" height="22px" viewBox="0 0 16 16" fill="none" class="form-modal__btn-loading">
-    <g fill="#000000" fill-rule="evenodd" clip-rule="evenodd">
-      <path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z" opacity=".2" fill="#fff"/>
-      <path d="M7.25.75A.75.75 0 018 0a8 8 0 018 8 .75.75 0 01-1.5 0A6.5 6.5 0 008 1.5a.75.75 0 01-.75-.75z" fill="#2b660b" />
-    </g>
-  </svg>
-  `;
+  const svgHtmlLoading = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16" fill="none" class="form-modal__btn-loading"><g fill="#000" fill-rule="evenodd" clip-rule="evenodd"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z" opacity=".2" fill="#fff"/><path d="M7.25.75A.75.75 0 018 0a8 8 0 018 8 .75.75 0 01-1.5 0A6.5 6.5 0 008 1.5a.75.75 0 01-.75-.75z" fill="#2b660b"/></g></svg>';
 
-  const svgHtmlSuccess = `
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="#000000"
-    width="22px"
-    height="22px"
-    viewBox="-3.5 0 19 19"
-    class="orm-modal__btn-success"
-  >
-    <path
-      d="M4.63 15.638a1.028 1.028 0 0 1-.79-.37L.36 11.09a1.03 1.03 0 1 1 1.58-1.316l2.535 3.043L9.958 3.32a1.029 1.029 0 0 1 1.783 1.03L5.52 15.122a1.03 1.03 0 0 1-.803.511.89.89 0 0 1-.088.004z" fill="#fff"
-    />
-  </svg>
-  `;
+  const svgHtmlSuccess = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="-3.5 0 19 19" class="orm-modal__btn-success"><path d="M4.63 15.638a1.028 1.028 0 0 1-.79-.37L.36 11.09a1.03 1.03 0 1 1 1.58-1.316l2.535 3.043L9.958 3.32a1.029 1.029 0 0 1 1.783 1.03L5.52 15.122a1.03 1.03 0 0 1-.803.511.89.89 0 0 1-.088.004z" fill="#fff"/></svg>';
 
   forms.forEach((form) => {
     const ajaxUrl = form.dataset.ajaxUrl;
@@ -228,10 +204,10 @@ document.addEventListener("DOMContentLoaded", function () {
             messageElem.textContent = "Успешно отправлено";
             submitButton.innerHTML = svgHtmlSuccess;
             form.reset();
-            setTimeout(()=>{
+            setTimeout(() => {
               messageElem.textContent = "";
               submitButton.innerHTML = "Отправить";
-            },3000)
+            }, 3000)
           } else {
             console.log("Ошибка: " + json.data.message);
             messageElem.textContent = json.data.message;
@@ -247,5 +223,23 @@ document.addEventListener("DOMContentLoaded", function () {
           submitButton.disabled = false;
         });
     });
+  });
+
+  // Проверяем, есть ли кука согласия
+  if (!document.cookie.includes('cookie_consent=')) {
+    cookieConsent.classList.remove('cookie-consent--hidden');
+  }
+
+  // Принятие куки
+  cookieAccept.addEventListener('click', function () {
+    document.cookie = 'cookie_consent=accepted; max-age=' + (30 * 24 * 60 * 60) + '; path=/; Secure; SameSite=Lax';
+    cookieConsent.classList.add('cookie-consent--hidden');
+  });
+
+  // Отклонение куки
+  cookieDecline.addEventListener('click', function () {
+    document.cookie = 'cookie_consent=declined; max-age=' + (30 * 24 * 60 * 60) + '; path=/; Secure; SameSite=Lax';
+    cookieConsent.classList.add('cookie-consent--hidden');
+    // Дополнительно можно удалить другие куки, если нужно
   });
 });

@@ -166,6 +166,21 @@
         <div class="form-modal__message"></div>
     </form>
 </div>
+<div class="cookie-consent cookie-consent--hidden js-cookie-consent">
+  <div class="cookie-consent__content">
+    <p class="cookie-consent__text">
+      Мы используем cookies для улучшения работы сайта. Продолжая использование, вы соглашаетесь с этим.
+    </p>
+    <div class="cookie-consent__buttons">
+      <button class="cookie-consent__button cookie-consent__button--accept js-cookie-accept" type="button">
+        Принять
+      </button>
+      <button class="cookie-consent__button cookie-consent__button--decline js-cookie-decline" type="button">
+        Отклонить
+      </button>
+    </div>
+  </div>
+</div>
 <?php wp_footer(); ?>
 <script type="application/ld+json">
 {
